@@ -83,19 +83,44 @@ void Modifier(){
 }
 void Recherche(){
     char Nnom[20];
-    printf("Entrez le nom :");
-    scanf(" %[^\n]s",&Nnom);
-    for(int i=0;i<count;i++){
-        if(strcmp(eleve[i].nom,Nnom)==0){
-            printf("le numero unique : %d\n",eleve[i].ID);
-            printf("le nom d'etudiant : %s\n",eleve[i].nom);
-            printf("le prenom d'etudiant : %s\n",eleve[i].prenom);
-            printf("la date de naissance : %s\n",eleve[i].d_naissance);
-            printf("le departement d'etudiant : %s\n",eleve[i].dep);
-            printf("la note generale d'etudiant : %f\n",eleve[i].N_generale);
-        }
+    char depR[20];
+    int choix,N=0;
+    printf("1. Chercher par nom.\n");
+    printf("2. Chercher par departement.\n");
+    printf("Entrez votre choix :");
+    scanf("%d",&choix);
+    switch(choix){
+    case 1:
+            printf("Entrez le nom :");
+            scanf(" %[^\n]s",&Nnom);
+            for(int i=0;i<count;i++){
+                if(strcmp(eleve[i].nom,Nnom)==0){
+                    printf("le numero unique : %d\n",eleve[i].ID);
+                    printf("le nom d'etudiant : %s\n",eleve[i].nom);
+                    printf("le prenom d'etudiant : %s\n",eleve[i].prenom);
+                    printf("la date de naissance : %s\n",eleve[i].d_naissance);
+                    printf("le departement d'etudiant : %s\n",eleve[i].dep);
+                    printf("la note generale d'etudiant : %f\n",eleve[i].N_generale);
+                }
+            }
 
+    break;
+    case 2:
+            printf("Entrez le departement :");
+            scanf(" %[^\n]s",&depR);
+            for (int i=0;i<count;i++){
+            if (strcmp(eleve[i].dep,depR)==0){
+                printf("\t\t--Etudiant-- %d :\n",N);
+                printf("Le numero unique d'etudiant :%d\n",eleve[i].ID);
+                printf("Le nom d'etudiant :%s\n",eleve[i].nom);
+                printf("Le prenom d'etudiant :%s\n",eleve[i].prenom);
+                printf("La date de naissance d'etudiant :%s\n",eleve[i].d_naissance);
+                printf("Le departement d'etudiant :%s\n",eleve[i].dep);
+                printf("La note generale d'etudiant :%.2f\n",eleve[i].N_generale);
+                N++;
+        }
     }
+}
 }
 void Supprimer (){
 int sup;
@@ -134,28 +159,45 @@ for (int i=0;i<count;i++){
     }
 }
 void calcul(){
-    char dept[20];
-    float Ngen=0,temp=0;
-    int N=0;
+     char T[20][50];
+     int countDep=0;
+     int stocker = 0;
+     float somme = 0;
+     int lengthDep = 0;
+        for (int i = 0; i < count; i++){
+            for (int j = 0; j < i; j++){
+                if (strcmp(eleve[i].dep, eleve[j].dep) == 0){
+                stocker = 1;
+                break;
+                }
+            }
+                if (!stocker){
+                      strcpy(T[countDep], eleve[i].dep);
+                      countDep++;
+                }
+        }
 
-    printf("Entrez le departement :");
-    scanf(" %[^\n]s",&dept);
-    for (int i=0;i<count;i++){
-        if (strcmp(eleve[i].dep,dept)==0){
-            Ngen=eleve[i].N_generale;
-            temp=temp+Ngen;
-            N++;
+        for (int i = 0; i < countDep; i++){
+            for (int j = 0; j < count; j++){
+                if (strcmp(T[i], eleve[j].dep) == 0){
+                    somme += eleve[j].N_generale;
+                    lengthDep++;
+                }
+            }
+        printf("Le departement %s = %.2f \n",eleve[i].dep,somme / lengthDep);
         }
     }
-        temp=temp/N;
-        printf("La moyenne generale du departement %s est : %.2f\n",dept,temp);
-}
 void Statistique(){
     int choix;
     char depS[20];
     char depR[20];
     int N=1,C=1,X=1;
     float S=0,temp=0;
+    char T[20][50];
+    int countDep=0;
+    int stocker = 0;
+    float somme = 0;
+    int lengthDep = 0;
 
     printf("1. Afficher le nombre total d'etudiants inscrits.\n");
     printf("2. Afficher le nombre d'etudiants dans chaque departement.\n");
@@ -169,21 +211,33 @@ void Statistique(){
         printf("Le nombre total d'etudiant inscrits : %d.\n",count);
         break;
     case 2:
-        printf("Entrez le departement :");
-        scanf(" %[^\n]s",&depS);
-        for (int i=0;i<count;i++){
-            if (strcmp(eleve[i].dep,depS)==0){
-                printf("\t\t--Etudiant-- %d :\n",N);
-                printf("Le numero unique d'etudiant :%d\n",eleve[i].ID);
-                printf("Le nom d'etudiant :%s\n",eleve[i].nom);
-                printf("Le prenom d'etudiant :%s\n",eleve[i].prenom);
-                printf("La date de naissance d'etudiant :%s\n",eleve[i].d_naissance);
-                printf("Le departement d'etudiant :%s\n",eleve[i].dep);
-                printf("La note generale d'etudiant :%.2f\n",eleve[i].N_generale);
-                N++;
+
+        for (int i = 0; i < count; i++){
+            for (int j = 0; j < i; j++){
+                if (strcmp(eleve[i].dep, eleve[j].dep) == 0){
+                stocker = 1;
+                break;
+                }
+            }
+        if (!stocker){
+              printf("%s\n", eleve[i].dep);
+              strcpy(T[countDep], eleve[i].dep);
+              countDep++;
             }
         }
-        break;
+
+        for (int i = 0; i < countDep; i++){
+            for (int j = 0; j < count; j++){
+                    if (strcmp(T[i], eleve[j].dep) == 0){
+                        somme += eleve[j].N_generale;
+                        lengthDep++;
+                    }
+            }
+
+        }
+        for (int i=0;i<countDep;i++)
+        printf("Le departement %s = %.2f \n: ", eleve[i].dep, somme / lengthDep);
+    break;
     case 3:
         printf("Entrez le seuil :");
         scanf("%f",&S);
@@ -228,8 +282,6 @@ void Statistique(){
                 printf("La note generale : %.2f",eleve[i].N_generale);
             }
         }
-
-
     }
 }
 
@@ -264,6 +316,8 @@ int main()
         case 7:
             Recherche();
             break;
+        case 9:
+            exit(0);
         }
 
     }while(choix<100);
