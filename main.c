@@ -75,7 +75,11 @@ void Modifier(){
                 break;
             case 5:
                 printf("Entrez la nouvelle note generale :");
+<<<<<<< HEAD
                 scanf("%f",&eleve[i].N_generale);
+=======
+                scanf(" %[^\n]s",&eleve[i].prenom);
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
                 break;
             }
         }
@@ -100,7 +104,11 @@ void Recherche(){
                     printf("le prenom d'etudiant : %s\n",eleve[i].prenom);
                     printf("la date de naissance : %s\n",eleve[i].d_naissance);
                     printf("le departement d'etudiant : %s\n",eleve[i].dep);
+<<<<<<< HEAD
                     printf("la note generale d'etudiant : %.2f\n",eleve[i].N_generale);
+=======
+                    printf("la note generale d'etudiant : %f\n",eleve[i].N_generale);
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
                 }
             }
 
@@ -160,6 +168,7 @@ for (int i=0;i<count;i++){
 }
 void calcul(){
      char T[20][50];
+<<<<<<< HEAD
      int countDep=0,cnt=0;
      int stocker = 0;
      float somme = 0,somme_G=0;
@@ -168,6 +177,13 @@ void calcul(){
 
         for (int i = 0; i < count; i++){
                 stocker=0;
+=======
+     int countDep=0;
+     int stocker = 0;
+     float somme = 0;
+     int lengthDep = 0;
+        for (int i = 0; i < count; i++){
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
             for (int j = 0; j < i; j++){
                 if (strcmp(eleve[i].dep, eleve[j].dep) == 0){
                 stocker = 1;
@@ -181,25 +197,39 @@ void calcul(){
         }
 
         for (int i = 0; i < countDep; i++){
+<<<<<<< HEAD
             for (int j = 0; j < countDep; j++){
+=======
+            for (int j = 0; j < count; j++){
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
                 if (strcmp(T[i], eleve[j].dep) == 0){
                     somme += eleve[j].N_generale;
                     lengthDep++;
                 }
             }
+<<<<<<< HEAD
         printf("Le departement %s = %.2f \n",T[i],somme / lengthDep);
         somme_G +=(somme/lengthDep);
 
         }
         printf("La moyenne generale est :%.2f\n",somme_G/countDep);
+=======
+        printf("Le departement %s = %.2f \n",eleve[i].dep,somme / lengthDep);
+        }
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
     }
 void Statistique(){
     int choix;
     char depS[20];
     char depR[20];
+<<<<<<< HEAD
     int N=1,C=1,X=1,temp=0;
     float S=0,tempG=0;
     char tempN[100],tempP[100],tempD[100],tempDep[100];
+=======
+    int N=1,C=1,X=1;
+    float S=0,temp=0;
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
     char T[20][50];
     int countDep=0;
     int stocker = 0;
@@ -218,14 +248,20 @@ void Statistique(){
         printf("Le nombre total d'etudiant inscrits : %d.\n",count);
         break;
     case 2:
+<<<<<<< HEAD
         for (int i = 0; i < count; i++){
                 stocker=0;
+=======
+
+        for (int i = 0; i < count; i++){
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
             for (int j = 0; j < i; j++){
                 if (strcmp(eleve[i].dep, eleve[j].dep) == 0){
                 stocker = 1;
                 break;
                 }
             }
+<<<<<<< HEAD
 
                 if (!stocker){
                       strcpy(T[countDep], eleve[i].dep);
@@ -242,6 +278,26 @@ void Statistique(){
             }
         printf("Nombre d'etudiant dans le departement %s = %d \n",T[i],lengthDep);
         }
+=======
+        if (!stocker){
+              printf("%s\n", eleve[i].dep);
+              strcpy(T[countDep], eleve[i].dep);
+              countDep++;
+            }
+        }
+
+        for (int i = 0; i < countDep; i++){
+            for (int j = 0; j < count; j++){
+                    if (strcmp(T[i], eleve[j].dep) == 0){
+                        somme += eleve[j].N_generale;
+                        lengthDep++;
+                    }
+            }
+
+        }
+        for (int i=0;i<countDep;i++)
+        printf("Le departement %s = %.2f \n: ", eleve[i].dep, somme / lengthDep);
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
     break;
     case 3:
         printf("Entrez le seuil :");
@@ -263,6 +319,7 @@ void Statistique(){
         for(int i =0;i<count;i++){
             for(int j=0;j<count;j++){
                 if(eleve[j].N_generale<eleve[j+1].N_generale){
+<<<<<<< HEAD
                     temp=eleve[j].ID;
                     eleve[j].ID=eleve[j+1].ID;
                     eleve[j+1].ID=temp;
@@ -282,6 +339,11 @@ void Statistique(){
                     eleve[j].N_generale=eleve[j+1].N_generale;
                     eleve[j+1].N_generale=tempG;
 
+=======
+                    temp=eleve[j].N_generale;
+                    eleve[j].N_generale=eleve[j+1].N_generale;
+                    eleve[j+1].N_generale=temp;
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
                 }
             }
         }
@@ -297,6 +359,7 @@ void Statistique(){
         }
         break;
     case 5:
+<<<<<<< HEAD
         for (int i = 0; i < count; i++){
                 stocker=0;
             for (int j = 0; j < i; j++){
@@ -319,11 +382,18 @@ void Statistique(){
                     if(eleve[j].N_generale>=10)
                             printf("%s : %.2f \n",eleve[j].nom,eleve[j].N_generale);
                 }
+=======
+        for (int i =0;i<count;i++){
+            if(eleve[i].N_generale>=10){
+                printf("Le nom d'etudiant : %s",eleve[i].nom);
+                printf("La note generale : %.2f",eleve[i].N_generale);
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
             }
         }
     }
 }
 
+<<<<<<< HEAD
 void tri(){
     int choix,choix2;
     int temp=0;
@@ -471,6 +541,10 @@ void tri(){
 
 }
 
+=======
+
+
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
 int main()
 {
     int choix;
@@ -500,9 +574,12 @@ int main()
         case 7:
             Recherche();
             break;
+<<<<<<< HEAD
         case 8:
             tri();
             break;
+=======
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
         case 9:
             exit(0);
         }
@@ -511,4 +588,7 @@ int main()
 
     return 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 319137f9202c7f01fb5fcb969dbf22882dd9abfd
